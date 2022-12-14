@@ -5,7 +5,8 @@ const movieListsController = require("../controllers/movieListsController");
 router
   .route("/")
   .get(movieListsController.getMovieList)
-  .post(movieListsController.addMovieList)
-  .delete(movieListsController.deleteMovieList);
+  .post(movieListsController.addMovieList);
+
+router.route("/:id").delete(movieListsController.deleteMovieList);
 
 module.exports = router;

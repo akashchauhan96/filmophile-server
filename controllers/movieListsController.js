@@ -43,7 +43,6 @@ const addMovieList = (req, res) => {
         number_of_movies: req.body.number_of_movies,
       })
       .then((id) => {
-        console.log(id);
         for (let i = 0; i < req.body.number_of_movies; i++) {
           knex("single_movie_list")
             .insert({
@@ -65,8 +64,9 @@ const addMovieList = (req, res) => {
 };
 
 const deleteMovieList = (req, res) => {
+  const newId = parseInt(req.params.id);
   knex("movie_lists")
-    .where({ id: req.params.id })
+    .where({ id: newId })
     .delete()
     .then(() => {
       res
