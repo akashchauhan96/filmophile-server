@@ -71,7 +71,7 @@ const deleteMovieList = (req, res) => {
       res
         .status(204)
         .send(
-          `The selected movie list with id: ${req.params.id} has been successfully deleted`
+          `The selected movie list with id: ${newId} has been successfully deleted`
         );
     })
     .catch((err) =>
