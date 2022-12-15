@@ -18,7 +18,6 @@ const getMovieList = (req, res) => {
       "single_movie_list.image_url"
     )
     .then((data) => {
-      console.log(res.data);
       res.status(200).json(data);
     })
     .catch((err) => {
