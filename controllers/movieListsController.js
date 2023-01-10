@@ -1,8 +1,7 @@
 const knex = require("knex")(require("../knexfile"));
-const e = require("express");
 const { v4: uuidv4 } = require("uuid");
 
-const getMovieList = (req, res) => {
+const getMovieList = (_req, res) => {
   knex("movie_lists")
     .join(
       "single_movie_list",
@@ -24,7 +23,23 @@ const getMovieList = (req, res) => {
       res.status(400).send(`Error retrieving warehouses ${err}`);
     });
 };
-("Error retrieving warehouses Error: select `movie_lists`.`id`, `movie_lists`.`name`, `movie_lists`.`description`, `movie_lists`.`number_of_movies`, `single_movie_list`.`movies_lists_id`, `single_movie_list`.`image_url` from `movie_lists` inner join `single_movie_list` on `movie_lists`.`id` = `single_movie_list`.`movie_lists_id` - ER_BAD_FIELD_ERROR: Unknown column 'single_movie_list.movies_lists_id' in 'field list'");
+
+const getOneList = (req, res) => {
+  knex("movie_lists")
+    .join(
+      "single_movie_list",
+      "movie_lists.id",
+      "single_movie_list.movie_lists_id"
+    )
+    .where({ movie_lists_id: parseInt(req.params.id) })
+    .then((data) => {
+      console.log(data);
+      res.status(200).json(data);
+    })
+    .catch((err) => {
+      res.status(400).send(`Error retrieving warehouse ${err}`);
+    });
+};
 
 const addMovieList = (req, res) => {
   req.body.id = uuidv4();
@@ -46,10 +61,11 @@ const addMovieList = (req, res) => {
           knex("single_movie_list")
             .insert({
               id: uuidv4(),
-              name: req.body.movie_name[i],
+              movie_name: req.body.movie_name[i],
               release_year: req.body.release_year[i],
               movie_lists_id: id,
               image_url: req.body.image_url[i],
+              backdrop_url: req.body.backdrop_url[i],
             })
             .then((newMovies) => {
               res.json(newMovies);
@@ -83,6 +99,7 @@ const deleteMovieList = (req, res) => {
 
 module.exports = {
   getMovieList,
+  getOneList,
   addMovieList,
   deleteMovieList,
 };

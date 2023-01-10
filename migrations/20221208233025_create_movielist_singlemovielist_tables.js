@@ -12,7 +12,7 @@ exports.up = async (knex) => {
   });
   await knex.schema.createTable("single_movie_list", (table) => {
     table.uuid("id").primary();
-    table.string("name").notNullable();
+    table.string("movie_name").notNullable();
     table.integer("release_year").notNullable();
     table
       .integer("movie_lists_id")
@@ -23,6 +23,7 @@ exports.up = async (knex) => {
       .onUpdate("CASCADE")
       .onDelete("CASCADE");
     table.string("image_url").notNullable();
+    table.string("backdrop_url").notNullable();
     table.timestamps(true, true);
   });
 };
