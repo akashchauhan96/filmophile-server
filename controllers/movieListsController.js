@@ -78,6 +78,56 @@ const addMovieList = (req, res) => {
   }
 };
 
+const updateMovieList = (req, res) => {
+  if (!req.body.name || !req.body.description || !req.body.number_of_movies) {
+    return res
+      .status(400)
+      .send(
+        "Please make sure to provide the required name and description of the updated movie list"
+      );
+  } else {
+    console.log(req.body);
+    knex("movie_lists")
+      .where({ id: req.params.id })
+      .update({
+        name: req.body.name,
+        description: req.body.description,
+        number_of_movies: req.body.number_of_movies,
+      })
+      // .then(() => {
+      //   res
+      //     .status(200)
+      //     .send(`Warehouse with id: ${req.params.id} has been updated`);
+      // });
+      .then(() => {
+        knex("single_movie_list")
+          .where({ movie_lists_id: req.params.id })
+          .delete()
+          .then(() => {
+            for (let i = 0; i < req.body.number_of_movies; i++) {
+              knex("single_movie_list")
+                .insert({
+                  id: uuidv4(),
+                  movie_name: req.body.movie_name[i],
+                  release_year: req.body.release_year[i],
+                  movie_lists_id: req.params.id,
+                  image_url: req.body.image_url[i],
+                  backdrop_url: req.body.backdrop_url[i],
+                })
+                .then((data) => {
+                  res
+                    .status(204)
+                    .send(`Movie list ${data} updated  successfully!`);
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+            }
+          });
+      });
+  }
+};
+
 const deleteMovieList = (req, res) => {
   const newId = parseInt(req.params.id);
   knex("movie_lists")
@@ -101,5 +151,6 @@ module.exports = {
   getMovieList,
   getOneList,
   addMovieList,
+  updateMovieList,
   deleteMovieList,
 };

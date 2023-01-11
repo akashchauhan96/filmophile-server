@@ -10,6 +10,7 @@ router
 router
   .route("/:id")
   .get(movieListsController.getOneList)
-  .delete(movieListsController.deleteMovieList);
+  .delete(movieListsController.deleteMovieList)
+  .put(movieListsController.updateMovieList);
 
 module.exports = router;
