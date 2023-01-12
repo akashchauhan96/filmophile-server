@@ -86,7 +86,6 @@ const updateMovieList = (req, res) => {
         "Please make sure to provide the required name and description of the updated movie list"
       );
   } else {
-    console.log(req.body);
     knex("movie_lists")
       .where({ id: req.params.id })
       .update({
@@ -94,17 +93,12 @@ const updateMovieList = (req, res) => {
         description: req.body.description,
         number_of_movies: req.body.number_of_movies,
       })
-      // .then(() => {
-      //   res
-      //     .status(200)
-      //     .send(`Warehouse with id: ${req.params.id} has been updated`);
-      // });
       .then(() => {
-        knex("single_movie_list")
-          .where({ movie_lists_id: req.params.id })
-          .delete()
-          .then(() => {
-            for (let i = 0; i < req.body.number_of_movies; i++) {
+        for (let i = 0; i < req.body.number_of_movies; i++) {
+          knex("single_movie_list")
+            .where({ movie_lists_id: req.params.id })
+            .delete()
+            .then(() => {
               knex("single_movie_list")
                 .insert({
                   id: uuidv4(),
@@ -122,8 +116,8 @@ const updateMovieList = (req, res) => {
                 .catch((err) => {
                   console.log(err);
                 });
-            }
-          });
+            });
+        }
       });
   }
 };
