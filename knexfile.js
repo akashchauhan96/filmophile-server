@@ -1,7 +1,7 @@
 require("dotenv").config();
 
 // const { DB_NAME, DB_USER, DB_PASSWORD } = process.env;
-const urlDB = `mysql://root:EsZECG3dz8JNXNOAhV08@containers-us-west-136.railway.app:5471/railway`;
+const urlDB = `mysql://${process.env.MYSQLUSER}:${process.env.MYSQLPASSWORD}@${process.env.MYSQLHOST}:${process.env.MYSQLPORT}/${process.env.MYSQLDATABASE}`;
 
 // Connect database with Knex
 module.exports = {
