@@ -8,7 +8,11 @@ const movieListsRoute = require("./routes/movieLists");
 
 app.use(express.json());
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
 app.use("/movie-lists", movieListsRoute);
 
