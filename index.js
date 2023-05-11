@@ -7,11 +7,7 @@ const movieListsRoute = require("./routes/movieLists");
 
 app.use(express.json());
 
-app.use(
-  cors({
-    origin: "https://filmophile.up.railway.app/",
-  })
-);
+app.use(cors(`*`));
 
 app.use("/movie-lists", movieListsRoute);
 
