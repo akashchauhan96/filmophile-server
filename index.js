@@ -9,7 +9,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: "https://filmophile-list.netlify.app",
+    origin: "https://filmophile.up.railway.app/",
   })
 );
 
