@@ -8,7 +8,11 @@ const movieListsRoute = require("./routes/movieLists");
 
 app.use(express.json());
 
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "https://filmophile.onrender.com"],
+  })
+);
 
 app.use("/movie-lists", movieListsRoute);
 
