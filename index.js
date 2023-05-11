@@ -8,11 +8,7 @@ const movieListsRoute = require("./routes/movieLists");
 
 app.use(express.json());
 
-app.use(
-  cors({
-    origin: "https://filmophile-list.netlify.app/",
-  })
-);
+app.use(cors());
 
 app.use("/movie-lists", movieListsRoute);
 
