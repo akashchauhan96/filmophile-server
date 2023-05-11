@@ -10,7 +10,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://filmophile.onrender.com"],
+    origin: "https://filmophile-list.netlify.app/",
   })
 );
 
