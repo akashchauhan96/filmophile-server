@@ -7,4 +7,7 @@ const urlDB = `mysql://${process.env.MYSQLUSER}:${process.env.MYSQLPASSWORD}@${p
 const connection = mysql.createConnection(urlDB);
 
 // Connect database with Knex
-module.exports = connection;
+module.exports = {
+  client: "mysql",
+  connection: connection,
+};
