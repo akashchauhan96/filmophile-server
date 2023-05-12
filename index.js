@@ -9,8 +9,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: "*",
-    methods: ["GET", "PUT", "POST", "DELETE"],
+    origin: "https://filmophile.up.railway.app",
   })
 );
 
