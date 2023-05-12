@@ -1,5 +1,5 @@
 require("dotenv").config();
-// const mysql = require("mysql");
+const knex = require("knex");
 
 // const { DB_NAME, DB_USER, DB_PASSWORD } = process.env;
 const urlDB = `mysql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.PORT}/${process.env.DB_NAME}`;
@@ -7,7 +7,7 @@ const urlDB = `mysql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${proce
 // const connection = mysql.createConnection(urlDB);
 
 // Connect database with Knex
-module.exports = {
+module.exports = knex({
   client: "mysql",
   connection: urlDB,
-};
+});
