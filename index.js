@@ -9,7 +9,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: false,
+    origin: "https://filmophile.up.railway.app/",
   })
 );
 
