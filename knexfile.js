@@ -8,6 +8,6 @@ const urlDB = `mysql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${proce
 // const connection = mysql.createConnection(urlDB);
 
 module.exports = {
-  client: "mysql",
+  client: "mysql2",
   connection: urlDB,
 };
