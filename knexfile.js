@@ -6,6 +6,6 @@ const urlDB = `mysql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${proce
 // const connection = mysql.createConnection(urlDB);
 
 module.exports = require("knex")({
-  client: "mysql",
+  // client: "mysql",
   connection: urlDB,
 });
