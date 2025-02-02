@@ -15,4 +15,4 @@ app.use(
 
 app.use("/movie-lists", movieListsRoute);
 
-app.listen(process.env.PORT || 8080);
+app.listen(3001);
